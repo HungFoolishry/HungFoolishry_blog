@@ -1,2 +1,2 @@
 # HungFoolishry_blog
-write little more than remeber
+write little more than remember
