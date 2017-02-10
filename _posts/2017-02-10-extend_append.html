@@ -4,18 +4,18 @@ title: python extend append区别
 ---
 <h2>{{ page.title }}</h2>
 <p>
+<pre>
 python 中extend与append的区别,举个栗子，我们就很清楚了。
 栗子：
-<pre>
 >>> a.extend([1,2])
 >>> print a
 [1, 2, '3', '1', 1, 2]
 >>> a.append([1,2])
 >>> print a
 [1, 2, '3', '1', 1, 2, [1, 2]]
-</pre>
 append和extend都仅只可以接收一个参数，
 append 任意，甚至是tuple
 extend 只能是一个列表
+</pre>
 </p>
 <p>{{ page.date | date_to_string }}</p>
