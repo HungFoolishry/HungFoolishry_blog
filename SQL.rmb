@@ -1,0 +1,7 @@
+1, left join 可以将两个表进行合并，左表的数据完全保留，右表的数据在on条件符合的情况下进行筛选后保留。
+select P.FirstName, P.LastName, A.City, A.State from Person as P LEFT JOIN Address as A on P.PersonId = A.PersonID
+select 左右表数据 from 左表 as 简名 LEFT JOIN 右表 as 简名 on 过滤条件 
+ 同理，right join 可以将右表所有数据显示，将左表过滤显示。
+
+如下文章用集合来表示，join的数据结构。
+http://www.cnblogs.com/sunjie9606/p/4167190.html
