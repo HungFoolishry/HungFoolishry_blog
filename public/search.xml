@@ -3,6 +3,72 @@
   
     
     <entry>
+      <title><![CDATA[hello-k8s]]></title>
+      <url>/2017/12/03/hello-k8s/</url>
+      <content type="html"><![CDATA[<p>2017年10月17日,docker宣布拥抱k8s,看来各种服务进行容器化是一股大潮流，谁跟不上就会被潮流淘汰。container对应用程序进行打包隔离，以后用户更多的应该会直接面对container而不是vm，最后到底是用户选择vm还是container，关键看需求。</p>
+<p>这周看着k8s权威指南开始在虚拟机中用k8s管理容器。<br>第一k8s中的几个概念：</p>
+<ul>
+<li>Pod：一个或者多个相同功能的容器，个人感觉像个容器池一样</li>
+<li>Container（容器）：k8s管理的最小单位，</li>
+<li>Label（标签）：k8s中资源的相互调用关系采用标签来识别，采用一个高可用键值存储系统etcd实现。</li>
+<li>Replication Controller（复制控制器）：对于多个pods进行管理，如果有一个pod挂了就会起一个新的pod。</li>
+<li>Service（服务）：多种pod进行组合形成service，service作为一层，将pod与上层进行抽象分割，保持自身的ip:端口的稳定，并且实现LB。</li>
+<li>Node（节点）：可以是一个服务器，也可以是一个虚拟机，负责起大量容器。有点像OpenStack中的计算节点小弟，只管控制节点需要的vm(资源)，然后和控制节点保持通讯畅通就好了。</li>
+<li>Kubernetes Master（Kubernetes主节点）：k8s中的老大与CLI+界面联系，然后到slaves的nodes上起容器就好了。有点像OpenStack中的控制节点，管理下面的计算节点小弟弟。<a id="more"></a>
+</li>
+</ul>
+<p><img src="http://dockerone.com/uploads/article/20151230/5e2bad1a25e33e2d155da81da1d3a54b.gif" alt="k8s"></p>
+<p>k8s环境部署：<br>按照k8s权威指南中的一步一步进行部署redis，总体来说还算顺利，但是由于GFW的原因docker中的各种镜像太难下载了吧，还好脑子一转想到阿里云也有相关的docker镜像源<a href="https://dev.aliyun.com/search.html" target="_blank" rel="external">https://dev.aliyun.com/search.html</a>,然后将大多数镜像都下载下来了，速度飞快。其中kubelet有个pod-infrastructure是每个pod需要的镜像，每次起redis容器的时候都会有个这个镜像的容器产生，应该是k8s管理容器的一个基础容器镜像，通过这个pod-infrastructure来管理docker的container。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line">[root@host-172-16-1-163 y]# cat /etc/kubernetes/kubelet </div><div class="line">###</div><div class="line"># kubernetes kubelet (minion) config</div><div class="line"></div><div class="line"></div><div class="line"># The address for the info server to serve on (set to 0.0.0.0 or &quot;&quot; for all interfaces)</div><div class="line">KUBELET_ADDRESS=&quot;--address=127.0.0.1&quot;</div><div class="line"></div><div class="line"></div><div class="line"># The port for the info server to serve on</div><div class="line"># KUBELET_PORT=&quot;--port=10250&quot;</div><div class="line"></div><div class="line"></div><div class="line"># You may leave this blank to use the actual hostname</div><div class="line">KUBELET_HOSTNAME=&quot;--hostname-override=127.0.0.1&quot;</div><div class="line"></div><div class="line"></div><div class="line"># location of the api-server</div><div class="line">KUBELET_API_SERVER=&quot;--api-servers=http://127.0.0.1:8080&quot;</div><div class="line"></div><div class="line"></div><div class="line"># pod infrastructure container</div><div class="line"># KUBELET_POD_INFRA_CONTAINER=&quot;--pod-infra-container-image=registry.access.redhat.com/rhel7/pod-infrastructure:latest&quot;</div><div class="line"># KUBELET_POD_INFRA_CONTAINER=&quot;--pod-infra-container-image=docker.io/tianyebj/pod-infrastructure:latest&quot;</div><div class="line">KUBELET_POD_INFRA_CONTAINER=&quot;--pod-infra-container-image=registry.cn-hangzhou.aliyuncs.com/architect/pod-infrastructure&quot;</div><div class="line"># Add your own!</div><div class="line">KUBELET_ARGS=&quot;&quot;</div><div class="line"></div><div class="line"></div><div class="line">[root@host-172-16-1-163 y]# cat redis-master-controller.yaml </div><div class="line">apiVersion: v1</div><div class="line">kind: ReplicationController</div><div class="line">metadata:</div><div class="line">  name: redis-master</div><div class="line">  labels:</div><div class="line">    name: redis-master</div><div class="line">spec:</div><div class="line">  replicas: 1</div><div class="line">  selector:</div><div class="line">    name: redis-master</div><div class="line">  template:</div><div class="line">    metadata:</div><div class="line">      labels:</div><div class="line">        name: redis-master</div><div class="line">    spec: </div><div class="line">      containers:</div><div class="line">      - name: master </div><div class="line">        image: registry.cn-hangzhou.aliyuncs.com/lonntec/kubeguide-redis-master</div><div class="line">        ports:</div><div class="line">        - containerPort: 6379</div></pre></td></tr></table></figure>
+<p>思考：<br>1.k8s本身如何做ha？<br>接触较多的是pacemaker+corosync实现ha，其中如果有相关服务存储采用本地盘的化就用drbd实现同步。<br>2，k8s作为一个服务，那么讲道理也可以直接跑在docker中，找个时间试试。</p>
+<p>相关阅读：</p>
+<p><a href="http://omerio.com/2015/12/18/learn-the-kubernetes-key-concepts-in-10-minutes/" title="http://omerio.com/2015/12/18/learn-the-kubernetes-key-concepts-in-10-minutes/" target="_blank" rel="external">Learn the Kubernetes Key Concepts in 10 Minutes</a></p>
+<p><a href="http://blog.csdn.net/levy_cui/article/details/70215627" title="http://blog.csdn.net/levy_cui/article/details/70215627" target="_blank" rel="external">Kubernetes系列01：Kubernetes入门</a></p>
+<p><a href="http://www.cnblogs.com/zhenyuyaodidiao/p/6500950.html" title="http://www.cnblogs.com/zhenyuyaodidiao/p/6500950.html" target="_blank" rel="external">为Kubernetes集群部署本地镜像仓库</a></p>
+<p><a href="https://www.ibm.com/developerworks/cn/opensource/os-kubernetes-developer-guide/index.html" title="https://www.ibm.com/developerworks/cn/opensource/os-kubernetes-developer-guide/index.html" target="_blank" rel="external">Kubernetes 开发指南</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> cloud </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> k8s </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[dockeker中的Namespace]]></title>
+      <url>/2017/11/26/dockeker%E4%B8%AD%E7%9A%84Namespace/</url>
+      <content type="html"><![CDATA[<p>最近开始研究docker与k8s部署相关的知识。k8s是容器编排工具，docker又是主流容器，其中docker底层采用了NAMESACE来做资源隔离，用CGROUP来控制资源的控制，还有docker是用GO语言写的，看来要学习的地方还有很多。</p>
+<p>NAMESPACE主要是docker用来做容器的资源隔离。对系统的主机名，域名，IPC，PID，网络，文件系统，用户与用户组做资源隔离。与fork一个进程类似，但是其中涉及的方面更加细，更加广。</p>
+<p>相关阅读：</p>
+<p><a href="http://www.infoq.com/cn/articles/docker-kernel-knowledge-namespace-resource-isolation?utm_source=infoq&amp;utm_campaign=user_page&amp;utm_medium=link" title="http://www.infoq.com/cn/articles/docker-kernel-knowledge-namespace-resource-isolation?utm_source=infoq&amp;utm_campaign=user_page&amp;utm_medium=link" target="_blank" rel="external">Docker背后的内核知识——Namespace资源隔离</a></p>
+<p><a href="https://docs.docker.com" title="https://docs.docker.com" target="_blank" rel="external">docker 官方文档</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> cloud </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> namespace </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[一个时间跳变导致的多线程卡死在time.sleep中的问题]]></title>
       <url>/2017/11/20/%E4%B8%80%E4%B8%AA%E6%97%B6%E9%97%B4%E8%B7%B3%E5%8F%98%E5%AF%BC%E8%87%B4%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8D%A1%E6%AD%BB%E5%9C%A8time-sleep%E4%B8%AD%E7%9A%84%E9%97%AE%E9%A2%98/</url>
       <content type="html"><![CDATA[<p>最近在公司遇到一个多线程卡死的问题：在对多个主机进行多线程操作的时候，主机的时钟进行ntp同步后进行了往后跳变，导致在线程进入time.sleep的时候卡死的问题。<br><a id="more"></a></p>
@@ -32,23 +98,24 @@
     </entry>
     
     <entry>
-      <title><![CDATA[moon]]></title>
-      <url>/2017/11/05/moon/</url>
-      <content type="html"><![CDATA[<h2 id="I-really-want-to-go-there"><a href="#I-really-want-to-go-there" class="headerlink" title="I really want to go there"></a>I really want to go there</h2><a id="more"></a>
-<p><a href="https://www.google.cn/maps/place/6709+Hyacinth+Ln,+Dallas,+TX+75252%E7%BE%8E%E5%9B%BD/@32.9911811,-96.7893613,237m/data=!3m2!1e3!4b1!4m31!1m25!4m24!1m6!1m2!1s0x864c6a83f5067cf9:0xe4beea700f7c219b!2zUHJlc3RvbiBSZCwgVGV4YXMsIOe-juWbvQ!2m2!1d-96.8019329!2d33.2184473!1m11!1m2!1s0x864c21da13c59513:0x62aa036489cd602b!2z5pmu6I6x6K-6IOe-juWbveW-t-WFi-iQqOaWr-W3ng!2m2!1d-96.6988856!2d33.0198431!3m4!1m2!1d-96.7892025!2d32.9909211!3s0x864c222c6e0d6fbd:0xf4159b8f3eafa30!1m3!2m2!1d-96.788708!2d32.991176!3e0!3m4!1s0x864c222c6f4ad8df:0xcfd3c8ae43623338!8m2!3d32.99118!4d-96.7888141" target="_blank" rel="external">https://www.google.cn/maps/place/6709+Hyacinth+Ln,+Dallas,+TX+75252%E7%BE%8E%E5%9B%BD/@32.9911811,-96.7893613,237m/data=!3m2!1e3!4b1!4m31!1m25!4m24!1m6!1m2!1s0x864c6a83f5067cf9:0xe4beea700f7c219b!2zUHJlc3RvbiBSZCwgVGV4YXMsIOe-juWbvQ!2m2!1d-96.8019329!2d33.2184473!1m11!1m2!1s0x864c21da13c59513:0x62aa036489cd602b!2z5pmu6I6x6K-6IOe-juWbveW-t-WFi-iQqOaWr-W3ng!2m2!1d-96.6988856!2d33.0198431!3m4!1m2!1d-96.7892025!2d32.9909211!3s0x864c222c6e0d6fbd:0xf4159b8f3eafa30!1m3!2m2!1d-96.788708!2d32.991176!3e0!3m4!1s0x864c222c6f4ad8df:0xcfd3c8ae43623338!8m2!3d32.99118!4d-96.7888141</a></p>
-<p>but I can’t be able to. TT</p>
+      <title><![CDATA[MYSQL-中的join-语句.md]]></title>
+      <url>/2017/11/06/MYSQL-%E4%B8%AD%E7%9A%84join-%E8%AF%AD%E5%8F%A5-md/</url>
+      <content type="html"><![CDATA[<p>1, left join 可以将两个表进行合并，左表的数据完全保留，右表的数据在on条件符合的情况下进行筛选后保留。<br>select P.FirstName, P.LastName, A.City, A.State from Person as P LEFT JOIN Address as A on P.PersonId = A.PersonID<br>select 左右表数据 from 左表 as 简名 LEFT JOIN 右表 as 简名 on 过滤条件<br> 同理，right join 可以将右表所有数据显示，将左表过滤显示。<br><a id="more"></a></p>
+<p>如下文章用集合来表示，join的数据结构。<br><a href="http://www.cnblogs.com/sunjie9606/p/4167190.html" target="_blank" rel="external">http://www.cnblogs.com/sunjie9606/p/4167190.html</a></p>
+<p>inner join 表示交集，<br>full join 表示合集<br>left join 表示左全集附加右过滤条件<br>right join 表示右<br>outer join 包括full left right join</p>
+<p>cross join表示笛卡尔积，表示所有可能性的组合情况</p>
 ]]></content>
       
         <categories>
             
-            <category> YJ&amp;XC </category>
+            <category> DB </category>
             
         </categories>
         
         
         <tags>
             
-            <tag> Moon </tag>
+            <tag> MYSQL </tag>
             
         </tags>
         
@@ -69,29 +136,39 @@
 <p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
 ]]></content>
       
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[MYSQL 中的join 语句]]></title>
-      <url>/2017/11/05/MYSQL-%E4%B8%AD%E7%9A%84join-%E8%AF%AD%E5%8F%A5/</url>
-      <content type="html"><![CDATA[<h2 id="left-join"><a href="#left-join" class="headerlink" title="left join"></a>left join</h2><p> left join 可以将两个表进行合并，左表的数据完全保留，右表的数据在on条件符合的情况下进行筛选后保留。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select P.FirstName, P.LastName, A.City, A.State from Person as P LEFT JOIN Address as A on P.PersonId = A.PersonID</div></pre></td></tr></table></figure></p>
-<p>说明：<br>  select 左右表数据 from 左表 as 简名 LEFT JOIN 右表 as 简名 on 过滤条件<br>  同理，right join 可以将右表所有数据显示，将左表过滤显示。</p>
-<p>如下文章用集合来表示，join的数据结构。<br><a href="http://www.cnblogs.com/sunjie9606/p/4167190.html" target="_blank" rel="external">http://www.cnblogs.com/sunjie9606/p/4167190.html</a></p>
-<a id="more"></a>
-<p>inner join 表示交集，<br>full join 表示合集<br>left join 表示左全集附加右过滤条件<br>right join 表示右<br>outer join 包括full left right join<br>cross join表示笛卡尔积，表示所有可能性的组合情况</p>
-]]></content>
-      
         <categories>
             
-            <category> DB </category>
+            <category> YJ&amp;XC </category>
             
         </categories>
         
         
         <tags>
             
-            <tag> MYSQL </tag>
+            <tag> HEXO </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[moon]]></title>
+      <url>/2017/11/05/moon/</url>
+      <content type="html"><![CDATA[<h2 id="I-really-want-to-go-there"><a href="#I-really-want-to-go-there" class="headerlink" title="I really want to go there"></a>I really want to go there</h2><a id="more"></a>
+<p><a href="https://www.google.cn/maps/place/6709+Hyacinth+Ln,+Dallas,+TX+75252%E7%BE%8E%E5%9B%BD/@32.9911811,-96.7893613,237m/data=!3m2!1e3!4b1!4m31!1m25!4m24!1m6!1m2!1s0x864c6a83f5067cf9:0xe4beea700f7c219b!2zUHJlc3RvbiBSZCwgVGV4YXMsIOe-juWbvQ!2m2!1d-96.8019329!2d33.2184473!1m11!1m2!1s0x864c21da13c59513:0x62aa036489cd602b!2z5pmu6I6x6K-6IOe-juWbveW-t-WFi-iQqOaWr-W3ng!2m2!1d-96.6988856!2d33.0198431!3m4!1m2!1d-96.7892025!2d32.9909211!3s0x864c222c6e0d6fbd:0xf4159b8f3eafa30!1m3!2m2!1d-96.788708!2d32.991176!3e0!3m4!1s0x864c222c6f4ad8df:0xcfd3c8ae43623338!8m2!3d32.99118!4d-96.7888141" target="_blank" rel="external">https://www.google.cn/maps/place/6709+Hyacinth+Ln,+Dallas,+TX+75252%E7%BE%8E%E5%9B%BD/@32.9911811,-96.7893613,237m/data=!3m2!1e3!4b1!4m31!1m25!4m24!1m6!1m2!1s0x864c6a83f5067cf9:0xe4beea700f7c219b!2zUHJlc3RvbiBSZCwgVGV4YXMsIOe-juWbvQ!2m2!1d-96.8019329!2d33.2184473!1m11!1m2!1s0x864c21da13c59513:0x62aa036489cd602b!2z5pmu6I6x6K-6IOe-juWbveW-t-WFi-iQqOaWr-W3ng!2m2!1d-96.6988856!2d33.0198431!3m4!1m2!1d-96.7892025!2d32.9909211!3s0x864c222c6e0d6fbd:0xf4159b8f3eafa30!1m3!2m2!1d-96.788708!2d32.991176!3e0!3m4!1s0x864c222c6f4ad8df:0xcfd3c8ae43623338!8m2!3d32.99118!4d-96.7888141</a></p>
+<p>but I can’t be able to. TT</p>
+]]></content>
+      
+        <categories>
+            
+            <category> YJ&amp;XC </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Moon </tag>
             
         </tags>
         

@@ -4,6 +4,86 @@
 
     
   <url>
+    <loc>http://yoursite.com/2017/12/03/hello-k8s/</loc>
+    <lastmod>2017-12-03T13:14:49.128Z</lastmod>
+    <data>
+        <display>
+        <title>hello-k8s</title>
+        <pubTime>2017-12-03T11:41:55.000Z</pubTime>
+        
+        <tag>k8s</tag>
+         
+         
+           
+             
+              <breadCrumb title="cloud" url="http://yoursite.com/categories/cloud/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/11/26/dockeker%E4%B8%AD%E7%9A%84Namespace/</loc>
+    <lastmod>2017-12-03T11:45:46.858Z</lastmod>
+    <data>
+        <display>
+        <title>dockeker中的Namespace</title>
+        <pubTime>2017-11-26T09:16:01.000Z</pubTime>
+        
+        <tag>namespace</tag>
+         
+         
+           
+             
+              <breadCrumb title="cloud" url="http://yoursite.com/categories/cloud/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/11/05/hello-world/</loc>
+    <lastmod>2017-11-26T09:52:00.911Z</lastmod>
+    <data>
+        <display>
+        <title>Hello World</title>
+        <pubTime>2017-11-05T15:36:30.000Z</pubTime>
+        
+        <tag>HEXO</tag>
+         
+         
+           
+             
+              <breadCrumb title="YJ&amp;XC" url="http://yoursite.com/categories/YJ-XC/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/11/06/MYSQL-%E4%B8%AD%E7%9A%84join-%E8%AF%AD%E5%8F%A5-md/</loc>
+    <lastmod>2017-11-26T09:34:38.312Z</lastmod>
+    <data>
+        <display>
+        <title>MYSQL-中的join-语句.md</title>
+        <pubTime>2017-11-06T09:30:21.000Z</pubTime>
+        
+        <tag>MYSQL</tag>
+         
+         
+           
+             
+              <breadCrumb title="DB" url="http://yoursite.com/categories/DB/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2017/11/05/moon/</loc>
     <lastmod>2017-11-20T13:59:35.536Z</lastmod>
     <data>
@@ -38,41 +118,6 @@
              
               <breadCrumb title="Python" url="http://yoursite.com/categories/Python/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/11/05/MYSQL-%E4%B8%AD%E7%9A%84join-%E8%AF%AD%E5%8F%A5/</loc>
-    <lastmod>2017-11-06T14:50:37.405Z</lastmod>
-    <data>
-        <display>
-        <title>MYSQL 中的join 语句</title>
-        <pubTime>2017-11-05T05:34:26.000Z</pubTime>
-        
-        <tag>MYSQL</tag>
-         
-         
-           
-             
-              <breadCrumb title="DB" url="http://yoursite.com/categories/DB/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/11/05/hello-world/</loc>
-    <lastmod>2017-11-05T08:01:29.367Z</lastmod>
-    <data>
-        <display>
-        <title>Hello World</title>
-        <pubTime>2017-11-05T08:01:29.351Z</pubTime>
-        
-         
-           
         </display>
     </data>
     </url>
