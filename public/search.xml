@@ -3,6 +3,56 @@
   
     
     <entry>
+      <title><![CDATA[python中的几个小小问题]]></title>
+      <url>/2017/12/10/python%E4%B8%AD%E7%9A%84%E5%87%A0%E4%B8%AA%E5%B0%8F%E5%B0%8F%E9%97%AE%E9%A2%98/</url>
+      <content type="html"><![CDATA[<p>这周据说是水逆周，有几件事情让人心力交瘁，心情大起大落，以后应该控制下，周一面试了一个python的岗位，问了几个问题，答得7788，感觉基础还是不是很牢固，目测过的概率也不是很大。但是，每次面试都让我学习到了很多，我希望再积累一段时间，毕竟自己不懂的东西太多，总的来说，纸上得来终觉浅，绝知此事要躬行。<br><a id="more"></a></p>
+<ul>
+<li>python中类的属性变量如何固定？</li>
+</ul>
+<p>在定义python类的时候，使用<code>__slots__</code>这个变量，可以固定python类的变量，并且如何不用<code>__slots__</code>来固定类变量，那么在创建大量实例后，内存消耗会非常严重。原因是python默认用一个dict来存储对象实例的属性，所以python作为动态语言，可以随时增加或者减少一个实例的属性。采用<code>__slots__</code>可以固定类的属性，自然创建实例后占用的空间也就少很多。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">class Image(object):</div><div class="line">    __slots__ = [&apos;id&apos;, &apos;caption&apos;, &apos;url&apos;]</div><div class="line"></div><div class="line">    def __init__(self, id, caption, url):</div><div class="line">        self.id = id</div><div class="line">        self.caption = caption</div><div class="line">        self.url = url</div><div class="line">        self._setup()</div><div class="line"></div><div class="line">    # ... other methods ...</div></pre></td></tr></table></figure></p>
+<ul>
+<li>python类中私有变量如何定义？</li>
+</ul>
+<p>python中变量使用下划线其实很有规范，不可以乱用。</p>
+<p>单个下划线前缀: <code>_var</code>,一种约定的私有名称的惯例，该名称表示，我是私有变量，但是如果别人一定要用，那么我也是可以被使用的。<br>还有在i18n中单下划线经常被用作国际化和本地化字符串翻译查询的函数名。</p>
+<p>双下划线前缀: <code>__var</code>, 是一种解释器实现的私有名称，在类的代码中，python会对其进行改写，如下类A中<code>__method_name</code>就在解释器中被改写成<code>_A__method_name</code>，当有一个类B对A进行继承后，该方法就会变成<code>_B__method_name</code>。可见双下划线名称是不可以乱用的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; class A(object):</div><div class="line">...     def _internal_use(self):</div><div class="line">...         pass</div><div class="line">...     def __method_name(self):</div><div class="line">...         pass</div><div class="line">... </div><div class="line">&gt;&gt;&gt; dir(A())</div><div class="line">[&apos;_A__method_name&apos;, ..., &apos;_internal_use&apos;]</div></pre></td></tr></table></figure></p>
+<p>双下划线前后缀：<code>__var__</code>, 这些事python的特殊方法名称，就是官方的名称，比如类中初始化函数<code>__init__</code>, 上文中的<code>__slots__</code>, 这些都有特殊的用途，可以重写，可以重新定义，实现不同功能。</p>
+<ul>
+<li>python中元类的使用(ORM相关)</li>
+</ul>
+<p>其实元类就是定义类的类，type。所有类都有一个老祖宗吧，那么python就定义tpye就是所有类的老祖宗，那么老祖宗的老祖宗呢?就好像在根目录<code>/</code>下进行<code>cd ..</code>，上一层目录还是自己。所以type的老祖宗还是自己。</p>
+<p>ORM使用元类来实现用户自定义各种表的列，然后采用实例来实现各种表的每一行。也就是说，表结构是一种用户自定的类，但是该实现方式是使用元类来定义，用元类实现表类，然后表中每一条记录，采用实例来实现，这样就完成ORM。</p>
+<p>如果想实现的，廖雪峰网站有个ORM的实现，相信敲完代码，跑一下后就会理解得更加深入。</p>
+<ul>
+<li>Python2官方的FAQ</li>
+</ul>
+<p>python2官方的FAQ，里面有好多之前看到的问题，其中有一个UnbondLocalError 的bug，是面试的时候问到的，查完资料后，发现自己用python还是不够多，革命尚未成功，同事仍需搬砖。</p>
+<p>链接：<a href="https://docs.python.org/2/faq/programming.html#why-am-i-getting-an-unboundlocalerror-when-the-variable-has-a-value" title="https://docs.python.org/2/faq/programming.html#why-am-i-getting-an-unboundlocalerror-when-the-variable-has-a-value" target="_blank" rel="external">Python2官方的FAQ</a></p>
+<p>相关阅读：</p>
+<p><a href="http://tech.oyster.com/save-ram-with-python-slots/" title="http://tech.oyster.com/save-ram-with-python-slots/ " target="_blank" rel="external">Saving 9 GB of RAM with Python’s <strong>slots</strong></a></p>
+<p>译文： <a href="http://blog.jobbole.com/52420/" title="http://blog.jobbole.com/52420/" target="_blank" rel="external">用Python的 <strong>slots</strong> 节省9G内存</a></p>
+<p><a href="https://shahriar.svbtle.com/underscores-in-python" title="https://shahriar.svbtle.com/underscores-in-python " target="_blank" rel="external">Underscores in Python</a></p>
+<p>译文： <a href="https://segmentfault.com/a/1190000002611411" title="https://segmentfault.com/a/1190000002611411" target="_blank" rel="external">Python 中的下划线</a></p>
+<p><a href="https://stackoverflow.com/questions/100003/what-is-a-metaclass-in-python" title="https://stackoverflow.com/questions/100003/what-is-a-metaclass-in-python " target="_blank" rel="external">what-is-a-metaclass-in-python “what-is-a-metaclass-in-python</a></p>
+<p><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014323389656575142d0bcfeec434e9639a80d3684a7da000" title="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014323389656575142d0bcfeec434e9639a80d3684a7da000" target="_blank" rel="external">编写ORM(廖雪峰)</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> Python </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> tips </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[hello-k8s]]></title>
       <url>/2017/12/03/hello-k8s/</url>
       <content type="html"><![CDATA[<p>2017年10月17日,docker宣布拥抱k8s,看来各种服务进行容器化是一股大潮流，谁跟不上就会被潮流淘汰。container对应用程序进行打包隔离，以后用户更多的应该会直接面对container而不是vm，最后到底是用户选择vm还是container，关键看需求。</p>

@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="k8s," />
+  <meta name="keywords" content="tips," />
 
 
 
@@ -94,20 +94,18 @@
 
 
 
-<meta name="description" content="2017年10月17日,docker宣布拥抱k8s,看来各种服务进行容器化是一股大潮流，谁跟不上就会被潮流淘汰。container对应用程序进行打包隔离，以后用户更多的应该会直接面对container而不是vm，最后到底是用户选择vm还是container，关键看需求。 这周看着k8s权威指南开始在虚拟机中用k8s管理容器。第一k8s中的几个概念：  Pod：一个或者多个相同功能的容器，个人感觉像">
-<meta name="keywords" content="k8s">
+<meta name="description" content="这周据说是水逆周，有几件事情让人心力交瘁，心情大起大落，以后应该控制下，周一面试了一个python的岗位，问了几个问题，答得7788，感觉基础还是不是很牢固，目测过的概率也不是很大。但是，每次面试都让我学习到了很多，我希望再积累一段时间，毕竟自己不懂的东西太多，总的来说，纸上得来终觉浅，绝知此事要躬行。">
+<meta name="keywords" content="tips">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hello-k8s">
-<meta property="og:url" content="http://yoursite.com/2017/12/03/hello-k8s/index.html">
+<meta property="og:title" content="python中的几个小小问题">
+<meta property="og:url" content="http://yoursite.com/2017/12/10/python中的几个小小问题/index.html">
 <meta property="og:site_name" content="Blog">
-<meta property="og:description" content="2017年10月17日,docker宣布拥抱k8s,看来各种服务进行容器化是一股大潮流，谁跟不上就会被潮流淘汰。container对应用程序进行打包隔离，以后用户更多的应该会直接面对container而不是vm，最后到底是用户选择vm还是container，关键看需求。 这周看着k8s权威指南开始在虚拟机中用k8s管理容器。第一k8s中的几个概念：  Pod：一个或者多个相同功能的容器，个人感觉像">
+<meta property="og:description" content="这周据说是水逆周，有几件事情让人心力交瘁，心情大起大落，以后应该控制下，周一面试了一个python的岗位，问了几个问题，答得7788，感觉基础还是不是很牢固，目测过的概率也不是很大。但是，每次面试都让我学习到了很多，我希望再积累一段时间，毕竟自己不懂的东西太多，总的来说，纸上得来终觉浅，绝知此事要躬行。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://dockerone.com/uploads/article/20151230/5e2bad1a25e33e2d155da81da1d3a54b.gif">
-<meta property="og:updated_time" content="2017-12-03T13:14:49.128Z">
+<meta property="og:updated_time" content="2017-12-10T11:11:16.655Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hello-k8s">
-<meta name="twitter:description" content="2017年10月17日,docker宣布拥抱k8s,看来各种服务进行容器化是一股大潮流，谁跟不上就会被潮流淘汰。container对应用程序进行打包隔离，以后用户更多的应该会直接面对container而不是vm，最后到底是用户选择vm还是container，关键看需求。 这周看着k8s权威指南开始在虚拟机中用k8s管理容器。第一k8s中的几个概念：  Pod：一个或者多个相同功能的容器，个人感觉像">
-<meta name="twitter:image" content="http://dockerone.com/uploads/article/20151230/5e2bad1a25e33e2d155da81da1d3a54b.gif">
+<meta name="twitter:title" content="python中的几个小小问题">
+<meta name="twitter:description" content="这周据说是水逆周，有几件事情让人心力交瘁，心情大起大落，以后应该控制下，周一面试了一个python的岗位，问了几个问题，答得7788，感觉基础还是不是很牢固，目测过的概率也不是很大。但是，每次面试都让我学习到了很多，我希望再积累一段时间，毕竟自己不懂的东西太多，总的来说，纸上得来终觉浅，绝知此事要躬行。">
 
 
 
@@ -136,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/12/03/hello-k8s/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/12/10/python中的几个小小问题/"/>
 
 
 
 
 
-  <title>hello-k8s | Blog</title>
+  <title>python中的几个小小问题 | Blog</title>
   
 
 
@@ -329,7 +327,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/03/hello-k8s/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/10/python中的几个小小问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ysvsys">
@@ -346,7 +344,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">hello-k8s</h1>
+          <h1 class="post-title" itemprop="name headline">python中的几个小小问题</h1>
         
 
         <div class="post-meta">
@@ -358,8 +356,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-03T19:41:55+08:00">
-                2017-12-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-10T18:12:15+08:00">
+                2017-12-10
               </time>
             
 
@@ -381,8 +379,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/cloud/" itemprop="url" rel="index">
-                    <span itemprop="name">cloud</span>
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
                   </a>
                 </span>
 
@@ -418,27 +416,36 @@
       
 
       
-        <p>2017年10月17日,docker宣布拥抱k8s,看来各种服务进行容器化是一股大潮流，谁跟不上就会被潮流淘汰。container对应用程序进行打包隔离，以后用户更多的应该会直接面对container而不是vm，最后到底是用户选择vm还是container，关键看需求。</p>
-<p>这周看着k8s权威指南开始在虚拟机中用k8s管理容器。<br>第一k8s中的几个概念：</p>
+        <p>这周据说是水逆周，有几件事情让人心力交瘁，心情大起大落，以后应该控制下，周一面试了一个python的岗位，问了几个问题，答得7788，感觉基础还是不是很牢固，目测过的概率也不是很大。但是，每次面试都让我学习到了很多，我希望再积累一段时间，毕竟自己不懂的东西太多，总的来说，纸上得来终觉浅，绝知此事要躬行。<br><a id="more"></a></p>
 <ul>
-<li>Pod：一个或者多个相同功能的容器，个人感觉像个容器池一样</li>
-<li>Container（容器）：k8s管理的最小单位，</li>
-<li>Label（标签）：k8s中资源的相互调用关系采用标签来识别，采用一个高可用键值存储系统etcd实现。</li>
-<li>Replication Controller（复制控制器）：对于多个pods进行管理，如果有一个pod挂了就会起一个新的pod。</li>
-<li>Service（服务）：多种pod进行组合形成service，service作为一层，将pod与上层进行抽象分割，保持自身的ip:端口的稳定，并且实现LB。</li>
-<li>Node（节点）：可以是一个服务器，也可以是一个虚拟机，负责起大量容器。有点像OpenStack中的计算节点小弟，只管控制节点需要的vm(资源)，然后和控制节点保持通讯畅通就好了。</li>
-<li>Kubernetes Master（Kubernetes主节点）：k8s中的老大与CLI+界面联系，然后到slaves的nodes上起容器就好了。有点像OpenStack中的控制节点，管理下面的计算节点小弟弟。<a id="more"></a>
-</li>
+<li>python中类的属性变量如何固定？</li>
 </ul>
-<p><img src="http://dockerone.com/uploads/article/20151230/5e2bad1a25e33e2d155da81da1d3a54b.gif" alt="k8s"></p>
-<p>k8s环境部署：<br>按照k8s权威指南中的一步一步进行部署redis，总体来说还算顺利，但是由于GFW的原因docker中的各种镜像太难下载了吧，还好脑子一转想到阿里云也有相关的docker镜像源<a href="https://dev.aliyun.com/search.html" target="_blank" rel="external">https://dev.aliyun.com/search.html</a>,然后将大多数镜像都下载下来了，速度飞快。其中kubelet有个pod-infrastructure是每个pod需要的镜像，每次起redis容器的时候都会有个这个镜像的容器产生，应该是k8s管理容器的一个基础容器镜像，通过这个pod-infrastructure来管理docker的container。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line">[root@host-172-16-1-163 y]# cat /etc/kubernetes/kubelet </div><div class="line">###</div><div class="line"># kubernetes kubelet (minion) config</div><div class="line"></div><div class="line"></div><div class="line"># The address for the info server to serve on (set to 0.0.0.0 or &quot;&quot; for all interfaces)</div><div class="line">KUBELET_ADDRESS=&quot;--address=127.0.0.1&quot;</div><div class="line"></div><div class="line"></div><div class="line"># The port for the info server to serve on</div><div class="line"># KUBELET_PORT=&quot;--port=10250&quot;</div><div class="line"></div><div class="line"></div><div class="line"># You may leave this blank to use the actual hostname</div><div class="line">KUBELET_HOSTNAME=&quot;--hostname-override=127.0.0.1&quot;</div><div class="line"></div><div class="line"></div><div class="line"># location of the api-server</div><div class="line">KUBELET_API_SERVER=&quot;--api-servers=http://127.0.0.1:8080&quot;</div><div class="line"></div><div class="line"></div><div class="line"># pod infrastructure container</div><div class="line"># KUBELET_POD_INFRA_CONTAINER=&quot;--pod-infra-container-image=registry.access.redhat.com/rhel7/pod-infrastructure:latest&quot;</div><div class="line"># KUBELET_POD_INFRA_CONTAINER=&quot;--pod-infra-container-image=docker.io/tianyebj/pod-infrastructure:latest&quot;</div><div class="line">KUBELET_POD_INFRA_CONTAINER=&quot;--pod-infra-container-image=registry.cn-hangzhou.aliyuncs.com/architect/pod-infrastructure&quot;</div><div class="line"># Add your own!</div><div class="line">KUBELET_ARGS=&quot;&quot;</div><div class="line"></div><div class="line"></div><div class="line">[root@host-172-16-1-163 y]# cat redis-master-controller.yaml </div><div class="line">apiVersion: v1</div><div class="line">kind: ReplicationController</div><div class="line">metadata:</div><div class="line">  name: redis-master</div><div class="line">  labels:</div><div class="line">    name: redis-master</div><div class="line">spec:</div><div class="line">  replicas: 1</div><div class="line">  selector:</div><div class="line">    name: redis-master</div><div class="line">  template:</div><div class="line">    metadata:</div><div class="line">      labels:</div><div class="line">        name: redis-master</div><div class="line">    spec: </div><div class="line">      containers:</div><div class="line">      - name: master </div><div class="line">        image: registry.cn-hangzhou.aliyuncs.com/lonntec/kubeguide-redis-master</div><div class="line">        ports:</div><div class="line">        - containerPort: 6379</div></pre></td></tr></table></figure>
-<p>思考：<br>1.k8s本身如何做ha？<br>接触较多的是pacemaker+corosync实现ha，其中如果有相关服务存储采用本地盘的化就用drbd实现同步。<br>2，k8s作为一个服务，那么讲道理也可以直接跑在docker中，找个时间试试。</p>
+<p>在定义python类的时候，使用<code>__slots__</code>这个变量，可以固定python类的变量，并且如何不用<code>__slots__</code>来固定类变量，那么在创建大量实例后，内存消耗会非常严重。原因是python默认用一个dict来存储对象实例的属性，所以python作为动态语言，可以随时增加或者减少一个实例的属性。采用<code>__slots__</code>可以固定类的属性，自然创建实例后占用的空间也就少很多。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">class Image(object):</div><div class="line">    __slots__ = [&apos;id&apos;, &apos;caption&apos;, &apos;url&apos;]</div><div class="line"></div><div class="line">    def __init__(self, id, caption, url):</div><div class="line">        self.id = id</div><div class="line">        self.caption = caption</div><div class="line">        self.url = url</div><div class="line">        self._setup()</div><div class="line"></div><div class="line">    # ... other methods ...</div></pre></td></tr></table></figure></p>
+<ul>
+<li>python类中私有变量如何定义？</li>
+</ul>
+<p>python中变量使用下划线其实很有规范，不可以乱用。</p>
+<p>单个下划线前缀: <code>_var</code>,一种约定的私有名称的惯例，该名称表示，我是私有变量，但是如果别人一定要用，那么我也是可以被使用的。<br>还有在i18n中单下划线经常被用作国际化和本地化字符串翻译查询的函数名。</p>
+<p>双下划线前缀: <code>__var</code>, 是一种解释器实现的私有名称，在类的代码中，python会对其进行改写，如下类A中<code>__method_name</code>就在解释器中被改写成<code>_A__method_name</code>，当有一个类B对A进行继承后，该方法就会变成<code>_B__method_name</code>。可见双下划线名称是不可以乱用的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; class A(object):</div><div class="line">...     def _internal_use(self):</div><div class="line">...         pass</div><div class="line">...     def __method_name(self):</div><div class="line">...         pass</div><div class="line">... </div><div class="line">&gt;&gt;&gt; dir(A())</div><div class="line">[&apos;_A__method_name&apos;, ..., &apos;_internal_use&apos;]</div></pre></td></tr></table></figure></p>
+<p>双下划线前后缀：<code>__var__</code>, 这些事python的特殊方法名称，就是官方的名称，比如类中初始化函数<code>__init__</code>, 上文中的<code>__slots__</code>, 这些都有特殊的用途，可以重写，可以重新定义，实现不同功能。</p>
+<ul>
+<li>python中元类的使用(ORM相关)</li>
+</ul>
+<p>其实元类就是定义类的类，type。所有类都有一个老祖宗吧，那么python就定义tpye就是所有类的老祖宗，那么老祖宗的老祖宗呢?就好像在根目录<code>/</code>下进行<code>cd ..</code>，上一层目录还是自己。所以type的老祖宗还是自己。</p>
+<p>ORM使用元类来实现用户自定义各种表的列，然后采用实例来实现各种表的每一行。也就是说，表结构是一种用户自定的类，但是该实现方式是使用元类来定义，用元类实现表类，然后表中每一条记录，采用实例来实现，这样就完成ORM。</p>
+<p>如果想实现的，廖雪峰网站有个ORM的实现，相信敲完代码，跑一下后就会理解得更加深入。</p>
+<ul>
+<li>Python2官方的FAQ</li>
+</ul>
+<p>python2官方的FAQ，里面有好多之前看到的问题，其中有一个UnbondLocalError 的bug，是面试的时候问到的，查完资料后，发现自己用python还是不够多，革命尚未成功，同事仍需搬砖。</p>
+<p>链接：<a href="https://docs.python.org/2/faq/programming.html#why-am-i-getting-an-unboundlocalerror-when-the-variable-has-a-value" title="https://docs.python.org/2/faq/programming.html#why-am-i-getting-an-unboundlocalerror-when-the-variable-has-a-value" target="_blank" rel="external">Python2官方的FAQ</a></p>
 <p>相关阅读：</p>
-<p><a href="http://omerio.com/2015/12/18/learn-the-kubernetes-key-concepts-in-10-minutes/" title="http://omerio.com/2015/12/18/learn-the-kubernetes-key-concepts-in-10-minutes/" target="_blank" rel="external">Learn the Kubernetes Key Concepts in 10 Minutes</a></p>
-<p><a href="http://blog.csdn.net/levy_cui/article/details/70215627" title="http://blog.csdn.net/levy_cui/article/details/70215627" target="_blank" rel="external">Kubernetes系列01：Kubernetes入门</a></p>
-<p><a href="http://www.cnblogs.com/zhenyuyaodidiao/p/6500950.html" title="http://www.cnblogs.com/zhenyuyaodidiao/p/6500950.html" target="_blank" rel="external">为Kubernetes集群部署本地镜像仓库</a></p>
-<p><a href="https://www.ibm.com/developerworks/cn/opensource/os-kubernetes-developer-guide/index.html" title="https://www.ibm.com/developerworks/cn/opensource/os-kubernetes-developer-guide/index.html" target="_blank" rel="external">Kubernetes 开发指南</a></p>
+<p><a href="http://tech.oyster.com/save-ram-with-python-slots/" title="http://tech.oyster.com/save-ram-with-python-slots/ " target="_blank" rel="external">Saving 9 GB of RAM with Python’s <strong>slots</strong></a></p>
+<p>译文： <a href="http://blog.jobbole.com/52420/" title="http://blog.jobbole.com/52420/" target="_blank" rel="external">用Python的 <strong>slots</strong> 节省9G内存</a></p>
+<p><a href="https://shahriar.svbtle.com/underscores-in-python" title="https://shahriar.svbtle.com/underscores-in-python " target="_blank" rel="external">Underscores in Python</a></p>
+<p>译文： <a href="https://segmentfault.com/a/1190000002611411" title="https://segmentfault.com/a/1190000002611411" target="_blank" rel="external">Python 中的下划线</a></p>
+<p><a href="https://stackoverflow.com/questions/100003/what-is-a-metaclass-in-python" title="https://stackoverflow.com/questions/100003/what-is-a-metaclass-in-python " target="_blank" rel="external">what-is-a-metaclass-in-python “what-is-a-metaclass-in-python</a></p>
+<p><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014323389656575142d0bcfeec434e9639a80d3684a7da000" title="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014323389656575142d0bcfeec434e9639a80d3684a7da000" target="_blank" rel="external">编写ORM(廖雪峰)</a></p>
 
       
     </div>
@@ -456,7 +463,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/k8s/" rel="tag"># k8s</a>
+            <a href="/tags/tips/" rel="tag"># tips</a>
           
         </div>
       
@@ -469,8 +476,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/26/dockeker中的Namespace/" rel="next" title="dockeker中的Namespace">
-                <i class="fa fa-chevron-left"></i> dockeker中的Namespace
+              <a href="/2017/12/03/hello-k8s/" rel="next" title="hello-k8s">
+                <i class="fa fa-chevron-left"></i> hello-k8s
               </a>
             
           </div>
@@ -478,10 +485,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/10/python中的几个小小问题/" rel="prev" title="python中的几个小小问题">
-                python中的几个小小问题 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
